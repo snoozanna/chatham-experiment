@@ -319,6 +319,7 @@ messageContainer.textContent = "WINNER!!"
 
 /* <<include "header">> */
 <main class="">
+<h2>JUST ON A PHONE!</h2>
 <<button "Start">><<goto "2">><</button>>
  </main>
 
