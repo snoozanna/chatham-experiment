@@ -156,14 +156,14 @@ console.log("boatMultiDraggable running")
   // Define the target area (e.g., a rectangle within the port container)
   const targetArea1 = {
     x: 200,   // X-coordinate of the top-left corner of the target area
-    y: 300,   // Y-coordinate of the top-left corner of the target area
+    y: 100,   // Y-coordinate of the top-left corner of the target area
     width: 100,  // Width of the target area
     height: 100  // Height of the target area
   };
 
  const targetArea2 = {
     x: 200,   // X-coordinate of the top-left corner of the target area
-    y: 500,   // Y-coordinate of the top-left corner of the target area
+    y: 300,   // Y-coordinate of the top-left corner of the target area
     width: 100,  // Width of the target area
     height: 100  // Height of the target area
   };
@@ -311,15 +311,15 @@ messageContainer.textContent = "WINNER!!"
 
 :: footer [nobr]
 <footer>
-<<button "Next">><<goto $nextpass>><</button>>
+<<button "Next">><<goto "landing">><</button>>
 </footer>
 
 
 :: landing {"position":"425,75","size":"100,100"}
 
-<<include "header">>
+/* <<include "header">> */
 <main class="">
-<<button "Start">><<goto "1">><</button>>
+<<button "Start">><<goto "2">><</button>>
  </main>
 
 :: 1 [nobr]

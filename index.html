@@ -241,14 +241,14 @@ console.log("boatMultiDraggable running")
   // Define the target area (e.g., a rectangle within the port container)
   const targetArea1 = {
     x: 200,   // X-coordinate of the top-left corner of the target area
-    y: 300,   // Y-coordinate of the top-left corner of the target area
+    y: 100,   // Y-coordinate of the top-left corner of the target area
     width: 100,  // Width of the target area
     height: 100  // Height of the target area
   };
 
  const targetArea2 = {
     x: 200,   // X-coordinate of the top-left corner of the target area
-    y: 500,   // Y-coordinate of the top-left corner of the target area
+    y: 300,   // Y-coordinate of the top-left corner of the target area
     width: 100,  // Width of the target area
     height: 100  // Height of the target area
   };
@@ -385,10 +385,10 @@ messageContainer.textContent = "WINNER!!"
 &lt;&lt;waitforaudio&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="header" tags="nobr" position="225,100" size="100,100">&lt;header&gt;
 &lt;div id=&quot;message&quot;&gt;DRAG THE ITEMS&lt;/div&gt;
 &lt;/header&gt;</tw-passagedata><tw-passagedata pid="3" name="footer" tags="nobr" position="350,100" size="100,100">&lt;footer&gt;
-&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="4" name="landing" tags="" position="425,75" size="100,100">&lt;&lt;include &quot;header&quot;&gt;&gt;
+&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto &quot;landing&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="4" name="landing" tags="" position="425,75" size="100,100">/* &lt;&lt;include &quot;header&quot;&gt;&gt; */
 &lt;main class=&quot;&quot;&gt;
-&lt;&lt;button &quot;Start&quot;&gt;&gt;&lt;&lt;goto &quot;1&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &quot;Start&quot;&gt;&gt;&lt;&lt;goto &quot;2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
  &lt;/main&gt;</tw-passagedata><tw-passagedata pid="5" name="1" tags="nobr" position="600,100" size="100,100">&lt;&lt;set $nextpass to &quot;2&quot;&gt;&gt;
 &lt;div id=&quot;port-container&quot;&gt;
   &lt;img id=&quot;port-image&quot; src=&quot;https://as2.ftcdn.net/v2/jpg/03/14/53/33/1000_F_314533326_bvHAGK2km39ORv1AEuNUGBxvqpvvmqxE.jpg&quot; alt=&quot;Port&quot;&gt;
