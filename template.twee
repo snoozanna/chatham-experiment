@@ -1,0 +1,353 @@
+:: StoryTitle
+Chatham Coney Experiment
+
+
+:: StoryData
+{
+	"ifid": "F9E39354-F641-4070-8B45-C310A3FDC8C3",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "landing",
+	"zoom": 1
+}
+
+
+:: Story Stylesheet [stylesheet]
+
+@import url("styles/generics.css");
+@import url("styles/styles.css");
+
+
+
+:: Story JavaScript [script]
+$('#ui-bar').remove();
+$(document.head).find('#style-ui-bar').remove();
+
+!function() {
+    postrender.typewriter = function (b) {
+        if (this.tags) {
+            var r = new RegExp("t8n.typewriter.([0-9]+)(?:[^0-9]|$)","g");
+            var t = r.exec(this.tags.toString());
+            if (t) {
+                typeout(b, t[1]+0);
+            }
+        }
+        return b;
+    };
+    var typeout = function(c,t) {
+        var Furl = function(current) {
+            this.n = current;
+            this.out = false;
+            this.data = current.nodeValue;
+            current.nodeValue = "";
+            this.kids = [];
+            var cn = current.childNodes;
+            if (current.style && current.style.display=="none") {
+                return;
+            }
+            while (cn.length>0) {
+                var f = new Furl(cn[0]);
+                current.removeChild(cn[0]);
+                f.out = true;this.kids.push(f);
+            }
+        };
+        var nodes = new Furl(c);
+        var unfurl = function(furled,d) {
+            var n = furled.n;
+            if (furled.out) {
+                d.appendChild(n);
+                furled.out = false;
+            }
+            if (furled.data) {
+                n.nodeValue += furled.data[0];
+                furled.data = furled.data.slice(1);
+                return true;
+            }
+            for (var j=0; j<furled.kids.length; j++) {
+                var ret = unfurl(furled.kids[j],n);
+                if (ret) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        var title = passage();
+        var intr = setInterval (
+            function() {
+                if (passage() == title && unfurl(nodes,null)) {
+                    return;
+                }
+                clearInterval(intr);
+            }
+        ,t);
+    };
+}();
+
+setup.boatDraggable = () => {
+console.log("boatDraggable running")
+  console.log("boatDraggable running");
+  const boatImage = document.getElementById('boat-image');
+  const portContainer = document.getElementById('port-container');
+
+  // Define the target area (e.g., a rectangle within the port container)
+  const targetArea = {
+    x: 200,   // X-coordinate of the top-left corner of the target area
+    y: 300,   // Y-coordinate of the top-left corner of the target area
+    width: 100,  // Width of the target area
+    height: 100  // Height of the target area
+  };
+
+  let offsetX, offsetY;
+
+  boatImage.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    offsetX = touch.clientX - boatImage.getBoundingClientRect().left;
+    offsetY = touch.clientY - boatImage.getBoundingClientRect().top;
+    boatImage.style.cursor = 'grabbing';
+  });
+
+  boatImage.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevent scrolling
+    const touch = e.touches[0];
+    const x = touch.clientX - offsetX;
+    const y = touch.clientY - offsetY;
+    boatImage.style.left = `${x}px`;
+    boatImage.style.top = `${y}px`;
+  });
+
+  boatImage.addEventListener('touchend', () => {
+    boatImage.style.cursor = 'grab';
+
+    // Check if the boat is within the target area
+    const boatRect = boatImage.getBoundingClientRect();
+    const portRect = portContainer.getBoundingClientRect();
+
+    const boatX = boatRect.left - portRect.left;
+    const boatY = boatRect.top - portRect.top;
+
+    console.log(`Boat position: (${boatX}, ${boatY})`);
+    console.log(`Target area: (${targetArea.x}, ${targetArea.y})`);
+
+    if (
+      boatX >= targetArea.x &&
+      boatX + boatRect.width <= targetArea.x + targetArea.width &&
+      boatY >= targetArea.y &&
+      boatY + boatRect.height <= targetArea.y + targetArea.height
+    ) {
+      boatImage.classList.add('win');
+      console.log("win!");
+    } else {
+      boatImage.classList.remove('win'); // Remove the class if not in the area
+       console.log("lose.");
+    }
+  });
+};
+
+
+setup.boatMultiDraggable = () => {
+  let completed = []
+  let completeList = ["boat", "elephant"]
+console.log("boatMultiDraggable running")
+  const boatImage = document.getElementById('boat-image');
+  const elephantImage = document.getElementById('elephant-image');
+  const portContainer = document.getElementById('port-container');
+  const messageContainer = document.getElementById("message")
+
+  // Define the target area (e.g., a rectangle within the port container)
+  const targetArea1 = {
+    x: 200,   // X-coordinate of the top-left corner of the target area
+    y: 300,   // Y-coordinate of the top-left corner of the target area
+    width: 100,  // Width of the target area
+    height: 100  // Height of the target area
+  };
+
+ const targetArea2 = {
+    x: 200,   // X-coordinate of the top-left corner of the target area
+    y: 500,   // Y-coordinate of the top-left corner of the target area
+    width: 100,  // Width of the target area
+    height: 100  // Height of the target area
+  };
+
+// BOAT 
+  let offsetX, offsetY;
+
+  boatImage.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    offsetX = touch.clientX - boatImage.getBoundingClientRect().left;
+    offsetY = touch.clientY - boatImage.getBoundingClientRect().top;
+    boatImage.style.cursor = 'grabbing';
+  });
+
+  boatImage.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevent scrolling
+    const touch = e.touches[0];
+    const x = touch.clientX - offsetX;
+    const y = touch.clientY - offsetY;
+    boatImage.style.left = `${x}px`;
+    boatImage.style.top = `${y}px`;
+  });
+
+  boatImage.addEventListener('touchend', () => {
+    boatImage.style.cursor = 'grab';
+
+    // Check if the boat is within the target area
+    const boatRect = boatImage.getBoundingClientRect();
+    const portRect = portContainer.getBoundingClientRect();
+
+    const boatX = boatRect.left - portRect.left;
+    const boatY = boatRect.top - portRect.top;
+
+    console.log(`Boat position: (${boatX}, ${boatY})`);
+    console.log(`Target area: (${targetArea1.x}, ${targetArea1.y})`);
+
+    if (
+      boatX >= targetArea1.x &&
+      boatX + boatRect.width <= targetArea1.x + targetArea1.width &&
+      boatY >= targetArea1.y &&
+      boatY + boatRect.height <= targetArea1.y + targetArea1.height
+    ) {
+      boatImage.classList.add('win');
+      completed.push("boat")
+      console.log("win!", completed);
+     checkCompleted()
+    } else {
+      boatImage.classList.remove('win'); // Remove the class if not in the area
+// Find the index of the item to remove
+      const index = completed.indexOf("boat");
+      if (index > -1) {
+          // Use splice to remove the item
+       completed.splice(index, 1);
+      }
+       console.log("lose.", completed);
+        checkCompleted()
+      }
+   });
+
+// ELEPHANT 
+  let eOffsetX, eOffsetY;
+
+  elephantImage.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    eOffsetX = touch.clientX - elephantImage.getBoundingClientRect().left;
+    eOffsetY = touch.clientY - elephantImage.getBoundingClientRect().top;
+    elephantImage.style.cursor = 'grabbing';
+  });
+
+  elephantImage.addEventListener('touchmove', (e) => {
+    e.preventDefault(); // Prevent scrolling
+    const touch = e.touches[0];
+    const x = touch.clientX - eOffsetX;
+    const y = touch.clientY - eOffsetY;
+    elephantImage.style.left = `${x}px`;
+    elephantImage.style.top = `${y}px`;
+  });
+
+  elephantImage.addEventListener('touchend', () => {
+    elephantImage.style.cursor = 'grab';
+
+    // Check if the boat is within the target area
+    const eleRect = elephantImage.getBoundingClientRect();
+    const portRect = portContainer.getBoundingClientRect();
+
+    const eleX = eleRect.left - portRect.left;
+    const eleY = eleRect.top - portRect.top;
+
+    console.log(`Boat position: (${eleX}, ${eleY})`);
+    console.log(`Target area: (${targetArea2.x}, ${targetArea2.y})`);
+
+    if (
+      eleX >= targetArea2.x &&
+      eleX + eleRect.width <= targetArea2.x + targetArea2.width &&
+      eleY >= targetArea2.y &&
+      eleY + eleRect.height <= targetArea2.y + targetArea2.height
+    ) {
+      elephantImage.classList.add('win');
+      completed.push("elephant");
+      console.log("win elephant!", completed);
+        checkCompleted()
+     } else {
+      elephantImage.classList.remove('win'); // Remove the class if not in the area
+// Find the index of the item to remove
+      const index = completed.indexOf("elephant");
+      if (index > -1) {
+          // Use splice to remove the item
+       completed.splice(index, 1);
+      }
+       console.log("lose.", completed);
+       checkCompleted()
+      }
+  });
+
+// CHECK COMPLETED ARRAY 
+const checkCompleted = () => {
+if (completeList.every(i => completed.includes(i))){
+messageContainer.textContent = "WINNER!!"
+  console.log("WINN!!")
+  
+}else{
+  messageContainer.textContent = "Keep going..."
+    console.log("keep going")
+}
+}
+
+
+};
+
+
+
+:: StoryInit
+<<cacheaudio "badjoke" "https://youhavefoundconey.net/CG/what/assets/audio/badjoke.mp3">>
+<<cacheaudio "tourescape" "https://youhavefoundconey.net/CG/what/assets/audio/tourescape.mp3">>
+<<cacheaudio "ping1" "../assets/sound/ping1.mp3">>
+<<cacheaudio "correct" "../assets/sound/keep2.mp3">>
+
+<<cacheaudio "complete" "../assets/sound/uploadcomplete.mp3">>
+<<waitforaudio>>
+
+:: header [nobr]
+<header>
+<div id="message">DRAG THE ITEMS</div>
+</header>
+
+:: footer [nobr]
+<footer>
+<<button "Next">><<goto $nextpass>><</button>>
+</footer>
+
+
+:: landing {"position":"425,75","size":"100,100"}
+
+<<include "header">>
+<main class="">
+<<button "Start">><<goto "1">><</button>>
+ </main>
+
+:: 1 [nobr]
+<<set $nextpass to "2">>
+<div id="port-container">
+  <img id="port-image" src="https://as2.ftcdn.net/v2/jpg/03/14/53/33/1000_F_314533326_bvHAGK2km39ORv1AEuNUGBxvqpvvmqxE.jpg" alt="Port">
+  <div id="target-area"></div>
+  <img id="boat-image" src="https://png.pngtree.com/png-vector/20231020/ourmid/pngtree-3d-illustration-of-wooden-boat-png-image_10298350.png" alt="Boat" draggable="true">
+</div>
+<<include "footer">>
+<<done>>
+<<set $s to setup.boatDraggable()>><</done>>
+
+
+:: 2 [nobr]
+<<include "header">>
+<div id="port-container">
+  <img id="port-image" src="https://as2.ftcdn.net/v2/jpg/03/14/53/33/1000_F_314533326_bvHAGK2km39ORv1AEuNUGBxvqpvvmqxE.jpg" alt="Port">
+  <div id="target-area1"></div>
+   <div id="target-area2"></div>
+   
+  <img id="boat-image" class="draggable-image" src="https://png.pngtree.com/png-vector/20231020/ourmid/pngtree-3d-illustration-of-wooden-boat-png-image_10298350.png" alt="Boat" draggable="true">
+  <img id="elephant-image" class="draggable-image" src="https://png.pngtree.com/png-clipart/20230411/original/pngtree-elephant-asian-elephant-png-image_9043910.png" alt="Elephant" draggable="true">
+</div>
+<<include "footer">>
+
+<<done>>
+<<set $s to setup.boatMultiDraggable()>><</done>>
+
+
+:: 3 [nobr]

@@ -1,0 +1,316 @@
+/* GENERAL STYLES */
+
+:root {
+    --greenpea-dark1: #034229;
+    --greenpea-dark2: #044e32;
+    --greenpea: #115b41;
+    --greenpea-light: #226c54;
+    --asparagus-dark1: #4d641e;
+    --asparagus-dark2: #637930;
+    --asparagus: #798f42;
+    --asparagus-light: #97ad5a;
+    --offwhite: #f6eee3;
+    --orange: rgb(39, 34, 32);
+    --lightorange: orange;
+    --main-bg-color: var(--greenpea-dark1);
+    --font-headings: "JetBrains Mono", monospace;
+    --font-body: "Poppins", sans-serif;
+    --padding: 2rem;
+  }
+  
+
+@font-face {
+    font-family: "Arcon";
+    src: url("./assets/fonts/arcon/Arcon-Regular.otf");
+}
+@font-face {
+    font-family: "SpecialElite";
+    src: url("./assets/fonts/special-elite/SpecialElite.ttf");
+}
+
+/* GET RID OF TWINE STYLES */
+#story {
+    margin: 0;
+  }
+  
+  #passages {
+    max-width: 100%;
+    width: 100%;
+  }
+
+.passage{
+    width: 100%; 
+    height: 100%; 
+}
+  
+  #story a.link-external:after {
+    content: "";
+  }
+  
+  button,
+  .inline-btn-wrapper > a {
+    background-color: var(--color-yellow);
+    color: var(--offwhite);
+    border: var(--offwhite) 1px solid;
+    border-radius: 3px;
+    font-family: var(--font-headings);
+    text-transform: uppercase;
+    padding: 5px;
+    box-shadow: var(--accent-color-shadow) 4px 4px;
+  }
+  
+  button:hover {
+    background-color: var(--color-pink);
+    border: var(--offwhite) 1px solid;
+    color: var(--offwhite);
+  }
+  
+  button:focus,
+  .inline-btn-wrapper > a {
+    transform: translate(2px, 2px);
+    box-shadow: var(--accent-color-shadow) 1px 1px;
+  }
+  
+  a {
+    color: var(--accent-color-secondary);
+  }
+  
+  a:active {
+    background-color: var(--color-pink);
+  }
+  
+  a:hover {
+    color: var(--offwhite);
+  }
+  
+  #story a.link-external:after {
+    content: "";
+  }
+  
+  #story {
+    margin: 0;
+  }
+  
+  body[data-tags~="t8n-dissolve"] .transition-in {
+    position: absolute;
+    opacity: 0;
+  }
+  body[data-tags~="t8n-dissolve"] .passage {
+    transition: 1s;
+    -webkit-transition: 1s;
+  }
+  body[data-tags~="t8n-dissolve"] .transition-out {
+    position: absolute;
+    opacity: 0;
+  }
+
+.hide{
+    display: none;
+}
+
+body {
+	background-color: #000;
+    /* background-color: #a14506; */
+	font-family: "Arcon", monospace;
+	font-size: 10px;
+	height: 100vh;
+	display:flex;
+	justify-content:center;
+	align-items: center;
+    overflow: scroll;
+}
+
+
+main{
+	padding: 2rem;
+    /* margin-top: 6rem; */
+    margin-bottom: 10rem;
+}
+
+.main-section{
+    background:#000
+}
+
+
+button{
+    background-color: transparent;
+    border: #fff 1px solid;
+    border-radius: 3px;
+}
+
+button:hover{
+	background-color:#cf1b98;
+	border: #fff 1px solid;
+	color: #fff;
+}
+
+img.parrots {
+  max-width: 300px
+}
+
+.img.joker > button > img {
+  max-width: 200px
+}
+
+.codeword1-input > input[type="text"] {
+    min-width: 8rem;
+    max-width: 10rem;
+    display: inline;
+    margin-bottom: 5rem;
+}
+
+
+/* MOBILE  */
+
+@media screen and (max-width: 700px) {
+	#passages {
+height: 100%;
+	font-size: 1.8rem;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#story {
+height: 100%;
+width: 100%;
+}
+
+#passage-prestart{
+	height: 100%
+}
+
+main {
+	height: 100%;
+
+}
+
+a:active {
+  background-color: #f2647d;
+}
+
+input[type=text] {
+    min-width: 14em;
+}
+
+}
+
+/* HEADERS  */
+
+header {
+  position: absolute;
+  top:0;
+  left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding);
+    width: 100%;
+    z-index: 99999;
+    background-color: black;
+  }
+
+  header > h3 {
+    margin-block-end: 0;
+  }
+  
+  header.column {
+    flex-direction: column;
+  }
+  
+  header.column > p {
+    text-align: center;
+  }
+  
+  .header-item > h1 {
+    font-size: 2rem;
+  }
+  
+  .header-item > h3.subtitle {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: var(--font-body);
+    margin-block-end: 2rem;
+  }
+
+
+/* FOOTER  */
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    padding: 1rem;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+/* BOAT  */
+#port-container {
+  position: relative;
+  width: 100%;  /* Full width on mobile */
+  height: 100vh; /* Full height of the viewport */
+  max-width: 500px; /* Limit maximum width for usability */
+  margin: 0 auto;
+  overflow: hidden; /* Hide overflow to prevent issues */
+}
+
+#port-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the area */
+}
+
+.draggable-image{
+  position: absolute;
+  left: 0;
+  width: 20%; /* Adjust size as needed */
+  cursor: grab;
+  z-index: 999999;
+}
+#boat-image {
+  left: 0;
+}  
+
+#elephant-image {
+  left: 20%;
+}  
+#boat-image.win, #elephant-image.win{
+  border: solid red 10px;
+}
+
+/* The target area styling */
+#target-area {
+  position: absolute;
+  left: 200px;  /* X-coordinate within the container */
+  top: 300px;   /* Y-coordinate within the container */
+  width: 100px; /* Width of the target area */
+  height: 100px; /* Height of the target area */
+  background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red */
+  border: 2px solid red; /* Solid red border */
+}
+
+
+#target-area1 {
+  position: absolute;
+  left: 200px;  /* X-coordinate within the container */
+  top: 300px;   /* Y-coordinate within the container */
+  width: 100px; /* Width of the target area */
+  height: 100px; /* Height of the target area */
+  background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red */
+  border: 2px solid red; /* Solid red border */
+}
+
+#target-area2 {
+  position: absolute;
+  left: 200px;  /* X-coordinate within the container */
+  top: 500px;   /* Y-coordinate within the container */
+  width: 100px; /* Width of the target area */
+  height: 100px; /* Height of the target area */
+  background-color: rgba(255, 0, 0, 0.3); /* Semi-transparent red */
+  border: 2px solid red; /* Solid red border */
+}
